@@ -1,4 +1,4 @@
-package com.example.testandroidapplication.injection
+package com.example.testandroidapplication.injection.module
 
 import com.example.testandroidapplication.network.NetworkService
 import com.example.testandroidapplication.utils.BASE_URL
