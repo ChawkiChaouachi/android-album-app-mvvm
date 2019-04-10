@@ -1,8 +1,6 @@
 package com.example.testandroidapplication.persistance
 
-import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
-
 import com.example.testandroidapplication.model.Album
 
 

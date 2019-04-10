@@ -56,10 +56,9 @@ class PostAlbumsViewModel : BaseViewModel() {
                 { result ->
 
                     onRetrievePostListSuccess(result as List<Album>)
-
                     progressBarState.set(false)
                 },
-                {   progressBarState.set(false)}
+                { progressBarState.set(false) }
             )
 
     }
