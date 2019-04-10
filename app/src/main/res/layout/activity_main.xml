@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-         xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
                 name="viewModel"
-                type="com.example.testandroidapplication.ui.PostAlbumsViewModel" />
+                type="com.example.testandroidapplication.ui.PostAlbumsViewModel"/>
     </data>
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
@@ -12,6 +12,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:adapter="@{viewModel.getAdapterAlbumsRecycler()}"
+        />
+
+        <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:customVisibility="@{viewModel.progressBarState}"
+
         />
 
     </RelativeLayout>

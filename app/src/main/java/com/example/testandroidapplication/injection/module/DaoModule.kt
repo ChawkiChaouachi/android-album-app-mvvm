@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 class DaoModule {
-    private lateinit var demoDatabase: DemoDatabase
+    private var demoDatabase: DemoDatabase
 
     constructor(context: Context){
         demoDatabase = Room.databaseBuilder(context,DemoDatabase::class.java,DATA_BASE_NAME).build()

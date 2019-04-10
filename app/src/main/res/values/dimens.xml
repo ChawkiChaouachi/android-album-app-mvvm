@@ -2,4 +2,5 @@
 <resources>
     <dimen name="card_corner_radius">12dp</dimen>
     <dimen name="card_elevation">12dp</dimen>
+    <dimen name="marginLeft">7dp</dimen>
 </resources>

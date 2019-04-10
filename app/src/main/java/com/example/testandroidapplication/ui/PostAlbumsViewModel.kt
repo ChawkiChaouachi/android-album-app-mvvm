@@ -1,5 +1,6 @@
 package com.example.testandroidapplication.ui
 
+import android.databinding.ObservableField
 import android.util.Log
 import com.example.testandroidapplication.base.BaseViewModel
 import com.example.testandroidapplication.injection.repo.AlbumRepository
@@ -23,6 +24,7 @@ class PostAlbumsViewModel : BaseViewModel() {
     private lateinit var subscription: Disposable
     val gson = Gson()
     var adapterAlbumsRecycler: AdapterAlbumsRecycler = AdapterAlbumsRecycler();
+    var progressBarState = ObservableField<Boolean>()
 
     init {
         loadAllAlbums()
@@ -30,6 +32,7 @@ class PostAlbumsViewModel : BaseViewModel() {
 
 
     private fun loadAllAlbums() {
+        progressBarState.set(true)
         Log.d("PostAlbumsViewModel ", "begin")
         subscription = Observable.fromCallable { albumRepository.findAllAlbum() }
             .concatMap { dbPostList ->
@@ -51,9 +54,12 @@ class PostAlbumsViewModel : BaseViewModel() {
             .subscribe(
 
                 { result ->
+
                     onRetrievePostListSuccess(result as List<Album>)
+
+                    progressBarState.set(false)
                 },
-                { }
+                {   progressBarState.set(false)}
             )
 
     }
