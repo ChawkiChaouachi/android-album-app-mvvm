@@ -2,6 +2,7 @@ package com.example.testandroidapplication.ui
 
 import android.util.Log
 import com.example.testandroidapplication.base.BaseViewModel
+import com.example.testandroidapplication.injection.repo.AlbumRepository
 import com.example.testandroidapplication.model.Album
 import com.example.testandroidapplication.network.NetworkService
 import com.example.testandroidapplication.ui.adapters.AdapterAlbumsRecycler
@@ -14,36 +15,51 @@ import javax.inject.Inject
 
 class PostAlbumsViewModel : BaseViewModel() {
     @Inject
-    lateinit var networkService : NetworkService
-    private lateinit var subscription : Disposable
+    lateinit var networkService: NetworkService
+
+    @Inject
+    lateinit var albumRepository: AlbumRepository
+
+    private lateinit var subscription: Disposable
     val gson = Gson()
-    var adapterAlbumsRecycler : AdapterAlbumsRecycler = AdapterAlbumsRecycler();
+    var adapterAlbumsRecycler: AdapterAlbumsRecycler = AdapterAlbumsRecycler();
 
     init {
         loadAllAlbums()
     }
 
+
     private fun loadAllAlbums() {
-        Log.d("PostListNumbersModel","begin work hello")
-        subscription = Observable.fromCallable { networkService.getAlbumList() }.concatMap {
-                listAlbums ->
-            Observable.just(listAlbums)
-        }.subscribeOn(Schedulers.io())
+        Log.d("PostAlbumsViewModel ", "begin")
+        subscription = Observable.fromCallable { albumRepository.findAllAlbum() }
+            .concatMap { dbPostList ->
+                Log.d("PostAlbumsViewModel ", "is empty list")
+                if (dbPostList == null || dbPostList.isEmpty()) {
+                    Log.d("PostAlbumsViewModel ", "is empty list")
+                    networkService.getAlbumList().concatMap { apiPostList ->
+                        albumRepository.insert(apiPostList)
+                        Observable.just(apiPostList)
+                    }
+                } else {
+                    Observable.just(dbPostList)
+                }
+            }
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { }
             .doOnTerminate { }
             .subscribe(
+
                 { result ->
-                    if(result!=null )
-                    Log.d("PostListNumbersModel","list ready "+gson.toJson(result.blockingFirst()))
-                    adapterAlbumsRecycler.updateChanged(result.blockingFirst())},
-                {
-
-                        error->                       Log.d("PostListNumbersModel",error.localizedMessage)
-
-                }
+                    onRetrievePostListSuccess(result as List<Album>)
+                },
+                { }
             )
+
     }
 
+    private fun onRetrievePostListSuccess(postList: List<Album>) {
+        adapterAlbumsRecycler.updateChanged(postList)
+    }
 
 }

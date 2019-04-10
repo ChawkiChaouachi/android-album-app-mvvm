@@ -1,11 +1,12 @@
 package com.example.testandroidapplication.injection.repo
 
 import android.arch.lifecycle.LiveData
+import android.util.Log
 import com.example.testandroidapplication.model.Album
 import com.example.testandroidapplication.persistance.AlbumsDao
 import javax.inject.Inject
 
-class AlbumDataSource : AlbumRepositery{
+class AlbumDataSource : AlbumRepository{
     var albumDao : AlbumsDao
 
     @Inject
@@ -15,20 +16,18 @@ class AlbumDataSource : AlbumRepositery{
 
 
 
-    override fun findAllAlbum(): LiveData<List<Album>> {
+    override fun findAllAlbum(): List<Album> {
+        Log.d("AlbumDataSource" , "Find All object ")
        return albumDao.findAll()
     }
 
-    override fun insert(obj: List<Album>): List<Long> {
-     return  albumDao.insert(obj)
+    override fun insert(obj: List<Album>) {
+       albumDao.insert(obj)
     }
 
-    override fun update(obj: List<Album>): List<Long> {
-       return albumDao.update(obj)
+    override fun update(obj: List<Album>){
+        albumDao.update(obj)
     }
 
-    override fun upsert(obj: List<Album>): Boolean {
-        return albumDao.upsert(obj)
-    }
 
 }

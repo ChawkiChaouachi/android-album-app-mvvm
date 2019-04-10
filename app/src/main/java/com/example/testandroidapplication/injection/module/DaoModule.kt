@@ -1,10 +1,9 @@
 package com.example.testandroidapplication.injection.module
 
-import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.example.testandroidapplication.injection.repo.AlbumDataSource
-import com.example.testandroidapplication.injection.repo.AlbumRepositery
+import com.example.testandroidapplication.injection.repo.AlbumRepository
 import com.example.testandroidapplication.injection.repo.DemoDatabase
 import com.example.testandroidapplication.persistance.AlbumsDao
 import com.example.testandroidapplication.utils.DATA_BASE_NAME
@@ -30,7 +29,7 @@ class DaoModule {
 
     @Singleton
     @Provides
-    internal fun provideAlbumRepository(albumsDao: AlbumsDao): AlbumRepositery {
+    internal fun provideAlbumRepository(albumsDao: AlbumsDao): AlbumRepository {
         return AlbumDataSource(albumsDao)
     }
 
