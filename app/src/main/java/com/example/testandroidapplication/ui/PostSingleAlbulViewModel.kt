@@ -12,12 +12,14 @@ class PostSingleAlbulViewModel :BaseViewModel() {
         title.value = album.title
         thumbnailUrl.value = album.thumbnailUrl
     }
-    fun getthumbnailUrl():MutableLiveData<String>{
+
+    fun getUrl():MutableLiveData<String>{
         return  thumbnailUrl;
     }
 
 
-    fun gettitle() : MutableLiveData<String>{
-        return title;
+    fun getValueTitle() : MutableLiveData<String>{
+        return thumbnailUrl;
     }
+
 }

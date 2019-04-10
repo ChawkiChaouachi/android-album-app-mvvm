@@ -22,8 +22,12 @@ fun setMutableName(view : TextView, text : MutableLiveData<String>?){
 }
 
 
-@BindingAdapter("thumbnailUrl", "picasso")
-fun setThumbnailUrl(view: ImageView, thumbnailUrl : String, picasso: Picasso) {
-    Picasso.get()
-        .load(thumbnailUrl)
-        .into(view);}
+@BindingAdapter("thumbnailUrl")
+fun setThumbnailUrl(view: ImageView, thumbnailUrl : MutableLiveData<String>?) {
+    val parentAvtivity : AppCompatActivity? = view.getParentActivity()
+    if(parentAvtivity!=null&&thumbnailUrl!=null){
+        thumbnailUrl.observe(parentAvtivity, Observer { value ->   Picasso.get()
+            .load(value)
+            .into(view); })
+    }
+}
