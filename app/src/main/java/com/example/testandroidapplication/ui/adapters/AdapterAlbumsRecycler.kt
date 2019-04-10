@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import com.example.testandroidapplication.R
 import com.example.testandroidapplication.databinding.SingleItemAlbumLayoutBinding
 import com.example.testandroidapplication.model.Album
-import com.example.testandroidapplication.ui.PostSingleAlbulViewModel
+import com.example.testandroidapplication.ui.PostSingleAlbumViewModel
 
 class AdapterAlbumsRecycler : RecyclerView.Adapter<AdapterAlbumsRecycler.ViewHolder>() {
     private lateinit var listAlbum : List<Album>
 
 
     override fun onCreateViewHolder(parent : ViewGroup, p1: Int): ViewHolder {
-        val itemNumberBinding : SingleItemAlbumLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.single_item_album_layout,parent,false);
-        return ViewHolder(itemNumberBinding);
+        val itemAlbumBinding : SingleItemAlbumLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.single_item_album_layout,parent,false);
+        return ViewHolder(itemAlbumBinding)
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +32,7 @@ class AdapterAlbumsRecycler : RecyclerView.Adapter<AdapterAlbumsRecycler.ViewHol
     }
 
     class ViewHolder(private val binding: SingleItemAlbumLayoutBinding): RecyclerView.ViewHolder(binding.root){
-        private val viewModel = PostSingleAlbulViewModel()
+        private val viewModel = PostSingleAlbumViewModel()
 
         fun bind(album: Album){
             viewModel.bind(album)

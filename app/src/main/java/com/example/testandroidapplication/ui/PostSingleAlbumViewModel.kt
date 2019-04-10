@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.example.testandroidapplication.base.BaseViewModel
 import com.example.testandroidapplication.model.Album
 
-class PostSingleAlbulViewModel :BaseViewModel() {
+class PostSingleAlbumViewModel :BaseViewModel() {
     private val title = MutableLiveData<String>()
     private val thumbnailUrl = MutableLiveData<String>()
 
@@ -14,12 +14,12 @@ class PostSingleAlbulViewModel :BaseViewModel() {
     }
 
     fun getUrl():MutableLiveData<String>{
-        return  thumbnailUrl;
+        return  thumbnailUrl
     }
 
 
     fun getValueTitle() : MutableLiveData<String>{
-        return thumbnailUrl;
+        return title
     }
 
 }

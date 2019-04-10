@@ -35,7 +35,8 @@ class PostAlbumsViewModel : BaseViewModel() {
             .subscribe(
                 { result ->
                     if(result!=null )
-                    Log.d("PostListNumbersModel","list ready "+gson.toJson(result.blockingFirst()))},
+                    Log.d("PostListNumbersModel","list ready "+gson.toJson(result.blockingFirst()))
+                    adapterAlbumsRecycler.updateChanged(result.blockingFirst())},
                 {
 
                         error->                       Log.d("PostListNumbersModel",error.localizedMessage)

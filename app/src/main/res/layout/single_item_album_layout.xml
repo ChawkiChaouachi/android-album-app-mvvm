@@ -4,7 +4,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.example.testandroidapplication.ui.PostSingleAlbulViewModel"/>
+                type="com.example.testandroidapplication.ui.PostSingleAlbumViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView
