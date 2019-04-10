@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.testandroidapplication.base.BaseViewModel
 import com.example.testandroidapplication.model.Album
 import com.example.testandroidapplication.network.NetworkService
+import com.example.testandroidapplication.ui.adapters.AdapterAlbumsRecycler
 import com.google.gson.Gson
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,6 +17,8 @@ class PostAlbumsViewModel : BaseViewModel() {
     lateinit var networkService : NetworkService
     private lateinit var subscription : Disposable
     val gson = Gson()
+    var adapterAlbumsRecycler : AdapterAlbumsRecycler = AdapterAlbumsRecycler();
+
     init {
         loadAllAlbums()
     }
