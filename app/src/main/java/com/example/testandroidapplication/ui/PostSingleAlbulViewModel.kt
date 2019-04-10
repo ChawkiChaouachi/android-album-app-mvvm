@@ -10,6 +10,7 @@ class PostSingleAlbulViewModel :BaseViewModel() {
 
     fun bind (album : Album) {
         title.value = album.title
+        thumbnailUrl.value = album.thumbnailUrl
     }
 
 }
