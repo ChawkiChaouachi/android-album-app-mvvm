@@ -31,6 +31,12 @@ fun setMutableName(view: TextView, text: MutableLiveData<String>?) {
     }
 }
 
+@BindingAdapter("observableTxt")
+fun setObservableTxt(view : TextView,obj : ObservableField<String>){
+ val parentActivity : AppCompatActivity? = view.getParentActivity()
+    if(parentActivity!=null && obj.get()!=null)
+        view.text = obj.get() ?: ""
+}
 
 @BindingAdapter("thumbnailUrl")
 fun setThumbnailUrl(view: ImageView, thumbnailUrl: MutableLiveData<String>?) {
@@ -42,6 +48,7 @@ fun setThumbnailUrl(view: ImageView, thumbnailUrl: MutableLiveData<String>?) {
                 .into(view);
         })
     }
+
 
 
 
